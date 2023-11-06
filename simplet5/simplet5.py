@@ -401,7 +401,7 @@ class SimpleT5:
         trainer.fit(self.T5Model, self.data_module)
 
     def load_model(
-        self, model_type: str = "t5", model_dir: str = "outputs", use_gpu: bool = False
+        self, model_type: str = "t5", model_dir: str = "outputs", use_gpu: bool = False, use_mps = False
     ):
         """
         loads a checkpoint for inferencing/prediction
@@ -428,6 +428,8 @@ class SimpleT5:
                 self.device = torch.device("cuda")
             else:
                 raise "exception ---> no gpu found. set use_gpu=False, to use CPU"
+        elif use_mps:
+            self.device = torch.device("mps")
         else:
             self.device = torch.device("cpu")
 
