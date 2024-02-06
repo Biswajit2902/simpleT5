@@ -256,9 +256,9 @@ class LightningModel(pl.LightningModule):
         self.log("test_loss", loss, prog_bar=True, logger=True)
         return loss
 
-    def configure_optimizers(self):
+    def configure_optimizers(self, lr=0.0001):
         """ configure optimizers """
-        return AdamW(self.parameters(), lr=0.0001)
+        return AdamW(self.parameters(), lr=lr)
 
     def training_epoch_end(self, training_step_outputs):
         """ save tokenizer and model on epoch end """
@@ -333,6 +333,7 @@ class SimpleT5:
         logger="default",
         dataloader_num_workers: int = 2,
         save_only_last_epoch: bool = False,
+        lr=0.0001
     ):
         """
         trains T5/MT5 model on custom dataset
@@ -367,6 +368,7 @@ class SimpleT5:
             outputdir=outputdir,
             save_only_last_epoch=save_only_last_epoch,
         )
+        self.T5Model.configure_optimizers(lr=lr)
 
         # add callbacks
         callbacks = [TQDMProgressBar(refresh_rate=5)]
