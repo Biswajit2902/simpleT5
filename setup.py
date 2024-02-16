@@ -42,9 +42,9 @@ setuptools.setup(
         "numpy",
         "pandas",
         "sentencepiece",
-        "torch>=1.7.0,!=1.8.0",  # excludes torch v1.8.0
-        "transformers==4.16.2",
-        "pytorch-lightning==1.5.10",
+        "torch", #>=1.7.0,!=1.8.0 removed # excludes torch v1.8.0
+        "transformers", # ==4.16.2
+        "pytorch-lightning", # ==1.5.10
     ],
     classifiers=[
         "Intended Audience :: Developers",
